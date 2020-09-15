@@ -12,6 +12,7 @@
 </template>
 
 <script>
+  import { fetchListByRole }  from '../../api/user'
   export default {
     data() {
       return {
@@ -42,6 +43,7 @@
           children: 'children',
           isLeaf: 'leaf'
         },
+        //nodeChilds:[],
         count: 1
       };
     },
@@ -75,35 +77,26 @@
                         summary:'普通用户'
                     }
                 ];
-            } else if(node.data.role.id === 2) {
-                data = [
-                    {
-                        name:'Vip1',
-                        role:node.data.role,
-                        summary:'用户1'
-                    },
-                    {
-                        name:'Vip2',
-                        role:node.data.role,
-                        summary:'用户2'
-                    },
-                ]
-            } else if(node.data.role.id === 3) {
-                data = [
-                    {
-                        name:'User1',
-                        role:node.data.role,
-                        summary:'用户3'
-                    },
-                    {
-                        name:'User2',
-                        role:node.data.role,
-                        summary:'用户4'
-                    },
-                ]
+            } else if(node.data.role.id === 2 
+                    || node.data.role.id === 3) {
+                fetchListByRole(node.data.role.id).then(response => {
+                    let code = response.data.code;
+                    if (code == 20000) {
+                        this.nodeChilds = response.data.nodeChilds;
+                    } else {
+                        this.nodeChilds = [];
+                    }
+                     console.log("1:" + this.nodeChilds);
+                });
+                console.log("2:" + this.nodeChilds);
+                data = this.nodeChilds;
+                if(!data) {
+                   data = [];
+                }
             } else {
                 data = [];
             }
+            console.log("3:" + this.nodeChilds);
             resolve(data);
         }, 200);
       }

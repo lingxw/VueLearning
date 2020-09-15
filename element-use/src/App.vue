@@ -2,6 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/tree">Tree</router-link> |
+      <router-link to="/code1">Code View 1</router-link> |
+      <router-link to="/code2">Code View 2</router-link> |
+      <router-link to="/dragWindow">Drag Window</router-link> |
     </div>
     <router-view/>
   </div>
