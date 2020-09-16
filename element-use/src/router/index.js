@@ -20,9 +20,24 @@ Vue.use(VueRouter)
     component: () => import('../views/codeView2.vue')
   },
   {
-    path: '/dragWindow',
-    name: 'Drag Window',
-    component: () => import('../views/dragWindow.vue')
+    path: '/dragView',
+    name: 'Drag View',
+    component: () => import('../views/dragView.vue')
+  },
+  {
+    path: '/dragDiv',
+    name: 'Drag Div',
+    component: () => import('../views/dragDiv.vue')
+  },
+  {
+    path: '/dragView2',
+    name: 'Drag View2',
+    component: () => import('../views/dragView2.vue')
+  },
+  {
+    path: '/dragView3',
+    name: 'Drag View3',
+    component: () => import('../views/dragView3.vue')
   }
 ]
 

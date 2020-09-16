@@ -1,6 +1,5 @@
 <template>
   <div style="text-align: left;">
-    <!-- <highlight-code :lang='contentLang' :code="content" /> -->
     <!-- bind to a data property named `code` -->
     <highlightjs autodetect :code="content" />
     <!-- or literal code works as well -->
@@ -9,7 +8,6 @@
 </template>
 
 <script>
-// import HighlightCode from '../components/HighlightCode'
 import hljs from 'highlight.js'
 
 window.hljs = hljs
@@ -24,9 +22,8 @@ function addLineNumbers() {
 }
 
 export default {
-  name: 'CodeView',
+  name: 'CodeView1',
   components: {
-    // HighlightCode
   },
   data() {
     return {

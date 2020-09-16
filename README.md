@@ -3,6 +3,7 @@
 * 为学习Element UI而创建的。
     https://element.eleme.cn/#/zh-CN
 * 并追加了Code高亮和行号追加
+* 并追加了拖拽
 * 使用下面的命令进行创建
     vue create element-use
 * 创建时，安装了下面的插件

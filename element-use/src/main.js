@@ -8,6 +8,8 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 // import Highlight from './plugins/highlight.js'
 import Highlight from './plugins/hl.js'
+import Drag from './plugins/drag'
+import DragAside from './plugins/dragAside'
 
 if (process.env.NODE_ENV === 'dev') {
   const { mockXHR } = require('../mock')
@@ -16,7 +18,9 @@ if (process.env.NODE_ENV === 'dev') {
 
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(Highlight)
-Vue.use(hljs.vuePlugin);
+Vue.use(hljs.vuePlugin)
+Vue.use(Drag)
+Vue.use(DragAside)
 
 Vue.config.productionTip = false
 
