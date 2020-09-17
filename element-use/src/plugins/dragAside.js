@@ -11,7 +11,8 @@ DragAside.install = function(Vue) {
         const left = document.createElement('div')
         const resize = document.createElement('div')
         const oChildNodes = oAside.childNodes
-        box.setAttribute('class', 'drag-aside-box')
+        const oldClass = box.getAttribute('class')
+        box.setAttribute('class', oldClass + ' drag-aside-box')
         left.setAttribute('class', 'drag-aside-left')
         resize.setAttribute('class', 'drag-aside-resize')
         oAside.setAttribute('width', 'auto')

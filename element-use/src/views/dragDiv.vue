@@ -1,12 +1,9 @@
 <template>
   <div id="box">
     <div class="top">顶部导航</div>
-    <div id="left"> 左边的div
-      <svg width="100%" id="controllerSvg" ></svg>
-    </div>
+    <div id="left"> 左边的div</div>
     <div id="resize"></div>
-    <div id="right" style="border-top: 1px solid #b5b9a9; ">右边的div
-    </div>
+    <div id="right" style="border-top: 1px solid #b5b9a9; ">右边的div</div>
     <p></p>
     <div class="drag" v-drag></div>
   </div>

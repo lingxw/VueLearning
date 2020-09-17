@@ -6,7 +6,8 @@
     "vue.js",
     "element-ui",
     "highlight",
-    "highlightjs-line-numbers.js"
+    "highlightjs-line-numbers.js",
+    "drag"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
