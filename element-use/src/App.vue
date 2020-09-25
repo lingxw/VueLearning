@@ -8,6 +8,7 @@
       <router-link to="/dragView">Drag View</router-link> |
       <router-link to="/dragView2">Drag View2</router-link> |
       <router-link to="/dragView3">Drag View3</router-link> |
+      <router-link to="/csv">csv</router-link>
     </div>
     <router-view/>
   </div>

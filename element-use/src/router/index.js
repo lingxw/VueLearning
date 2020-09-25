@@ -38,6 +38,11 @@ Vue.use(VueRouter)
     path: '/dragView3',
     name: 'Drag View3',
     component: () => import('../views/dragView3.vue')
+  },
+  {
+    path: '/csv',
+    name: 'csv',
+    component: () => import('../views/csv.vue')
   }
 ]
 
