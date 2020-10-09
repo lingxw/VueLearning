@@ -52,7 +52,8 @@ export default {
 }
 .hljs-ln-code,
 .hljs-ln-numbers {
-  line-height: 14px;
+  line-height: 12px;
+  border: none;
 }
 code {
   white-space: pre-wrap;

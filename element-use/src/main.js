@@ -10,6 +10,8 @@ import 'highlight.js/styles/atom-one-dark.css'
 import Highlight from './plugins/hl.js'
 import Drag from './plugins/drag'
 import DragAside from './plugins/dragAside'
+import MarkdownItVue from 'markdown-it-vue'
+import 'markdown-it-vue/dist/markdown-it-vue.css'
 
 if (process.env.NODE_ENV === 'dev') {
   const { mockXHR } = require('../mock')
@@ -21,6 +23,7 @@ Vue.use(Highlight)
 Vue.use(hljs.vuePlugin)
 Vue.use(Drag)
 Vue.use(DragAside)
+Vue.use(MarkdownItVue)
 
 Vue.config.productionTip = false
 

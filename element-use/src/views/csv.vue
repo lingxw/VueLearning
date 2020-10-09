@@ -8,7 +8,11 @@
       highlight-current-row
       :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       height="200px"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column
+        type="selection"
+      />
       <el-table-column
         type="index"
         width="30px"
@@ -59,6 +63,7 @@ export default {
           prop: 1
         }
       ],
+      multipleSelection: [],
       fileList: []
     }
   },
@@ -72,6 +77,9 @@ export default {
   computed: {
   },
   methods: {
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
     /**
     * by wjw
     * 导出指令csv文件
@@ -99,9 +107,9 @@ export default {
       if (selectedFile === undefined){
         return
       }
-      window.csv = {}
-      window.csv.tableData = this.tableData
-      window.csv.tableTitle = this.tableTitle
+      const csv = {}
+      csv.tableData = this.tableData
+      csv.tableTitle = this.tableTitle
       var reader = new FileReader()
       reader.readAsDataURL(selectedFile)
       reader.onload = () => {
@@ -117,22 +125,22 @@ export default {
               // 去除最后的空行
               data.pop()
             }
-            window.csv.tableData.splice(0)
+            csv.tableData.splice(0)
             data.forEach(function (item) {
-              window.csv.tableData.push(item)
+              csv.tableData.push(item)
             })
             
-            window.csv.tableTitle.splice(0)
-            window.csv.tableTitle.push({
+            csv.tableTitle.splice(0)
+            csv.tableTitle.push({
                 label: 'word',
                 prop: 0
               })
-            window.csv.tableTitle.push(              {
+            csv.tableTitle.push(              {
                 label: 'AND',
                 prop: 1
               })
-            for (var i = 2; i < window.csv.tableData[0].length; i++) {
-              window.csv.tableTitle.push({
+            for (var i = 2; i < csv.tableData[0].length; i++) {
+              csv.tableTitle.push({
                   label: 'AND',
                   prop: i
               })
@@ -173,6 +181,7 @@ export default {
         this.$message.error('上传文件大小不能超过 1MB!')
         return false
       }
+    
       var reader = new FileReader()
       reader.readAsDataURL(file.raw)
       reader.onload = function(){

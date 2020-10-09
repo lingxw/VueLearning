@@ -4,6 +4,7 @@
       <router-link to="/tree">Tree</router-link> |
       <router-link to="/code1">Code View 1</router-link> |
       <router-link to="/code2">Code View 2</router-link> |
+      <router-link to="/code3">Code View 3</router-link> |
       <router-link to="/dragDiv">Drag Div</router-link> |
       <router-link to="/dragView">Drag View</router-link> |
       <router-link to="/dragView2">Drag View2</router-link> |

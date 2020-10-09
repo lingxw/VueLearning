@@ -20,6 +20,11 @@ Vue.use(VueRouter)
     component: () => import('../views/codeView2.vue')
   },
   {
+    path: '/code3',
+    name: 'Code View3',
+    component: () => import('../views/codeView3.vue')
+  },
+  {
     path: '/dragView',
     name: 'Drag View',
     component: () => import('../views/dragView.vue')

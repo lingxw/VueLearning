@@ -1,28 +1,21 @@
 <template>
   <div style="text-align: left;">
-    <!-- bind to a data property named `code` -->
-    <highlightjs autodetect :code="content" />
-    <!-- or literal code works as well -->
-    <highlightjs  :language="contentLang" code="var x = 5;" />
     <markdown-it-vue ref="sv-md" class="md-body" :content="'```\n' + content + '\n```'" />
   </div>
 </template>
 
 <script>
-import hljs from 'highlight.js'
-window.hljs = hljs
-require('highlightjs-line-numbers.js')
+import '../plugins/highlightjs-line-numbers'
 
 function addLineNumbers() {
-  // hljs.initHighlightingOnLoad()
-  hljs.initLineNumbersOnLoad({ 
+  window.initLineNumbersOnLoad({ 
     singleLine:true,
     startFrom: 1
   })
 }
 
 export default {
-  name: 'CodeView1',
+  name: 'CodeView3',
   components: {
   },
   data() {
@@ -44,12 +37,12 @@ export default {
   computed: {
   },
   methods: {
-  },
-  
+  }
 }
 </script>
 
 <style>
+
 .hljs-ln-numbers {
   text-align: center;
   color: #ccc;
@@ -72,7 +65,7 @@ export default {
   line-height: 12px;
 }
 
-.markdown-body .hljs table td.hljs-ln-numbers {
+.markdown-body table td.hljs-ln-numbers {
   text-align: center;
   color: #ccc;
   border-right: 1px solid #999;
