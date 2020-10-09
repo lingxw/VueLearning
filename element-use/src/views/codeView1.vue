@@ -4,7 +4,6 @@
     <highlightjs autodetect :code="content" />
     <!-- or literal code works as well -->
     <highlightjs  :language="contentLang" code="var x = 5;" />
-    <markdown-it-vue ref="sv-md" class="md-body" :content="'```\n' + content + '\n```'" />
   </div>
 </template>
 
@@ -37,9 +36,7 @@ export default {
   },
   mounted() {
     console.log(`[${this.name}] Mounted`)
-    this.$nextTick(function () {
-      addLineNumbers()
-    })
+    addLineNumbers()
   },
   computed: {
   },
