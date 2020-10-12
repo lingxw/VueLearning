@@ -6,6 +6,7 @@
 
 <script>
 import '../plugins/highlightjs-line-numbers'
+import HljsExtend from '../plugins/highlightjs-extend'
 
 function addLineNumbers() {
   window.initLineNumbersOnLoad({ 
@@ -32,6 +33,7 @@ export default {
     console.log(`[${this.name}] Mounted`)
     this.$nextTick(function () {
       addLineNumbers()
+      HljsExtend.hoverLine()
     })
   },
   computed: {
@@ -93,5 +95,9 @@ export default {
 code {
   white-space: pre-wrap;
   overflow: auto;
+}
+
+.hljs-ln tr.current-row>td {
+  background-color: #ecf5ff;
 }
 </style>

@@ -1,11 +1,12 @@
 <template>
   <div style="text-align: left;">
-    <highlight-code :lang='contentLang' :code="content" />
+    <highlight-code v-hljs-event :lang='contentLang' :code="content" />
   </div>
 </template>
 
 <script>
 import HighlightCode from '../components/HighlightCode'
+// import HljsExtend from '../plugins/highlightjs-extend'
 
 export default {
   name: 'CodeView2',
@@ -24,6 +25,7 @@ export default {
   },
   mounted() {
     console.log(`[${this.name}] Mounted`)
+    // HljsExtend.hoverLine()
   },
   computed: {
   },
@@ -58,5 +60,9 @@ export default {
 code {
   white-space: pre-wrap;
   overflow: auto;
+}
+
+.hljs-ln tr.current-row>td {
+  background-color: #ecf5ff;
 }
 </style>

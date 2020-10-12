@@ -3,7 +3,7 @@
     <!-- bind to a data property named `code` -->
     <highlightjs autodetect :code="content" />
     <!-- or literal code works as well -->
-    <highlightjs  :language="contentLang" code="var x = 5;" />
+    <highlightjs :language="contentLang" code="var x = 5;" />
   </div>
 </template>
 
@@ -11,9 +11,9 @@
 import hljs from 'highlight.js'
 window.hljs = hljs
 require('highlightjs-line-numbers.js')
+import HljsExtend from '../plugins/highlightjs-extend'
 
 function addLineNumbers() {
-  // hljs.initHighlightingOnLoad()
   hljs.initLineNumbersOnLoad({ 
     singleLine:true,
     startFrom: 1
@@ -37,6 +37,7 @@ export default {
   mounted() {
     console.log(`[${this.name}] Mounted`)
     addLineNumbers()
+    HljsExtend.hoverLine()
   },
   computed: {
   },
@@ -97,5 +98,9 @@ export default {
 code {
   white-space: pre-wrap;
   overflow: auto;
+}
+
+.hljs-ln tr.current-row>td {
+  background-color: #ecf5ff;
 }
 </style>

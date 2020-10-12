@@ -12,6 +12,7 @@ import Drag from './plugins/drag'
 import DragAside from './plugins/dragAside'
 import MarkdownItVue from 'markdown-it-vue'
 import 'markdown-it-vue/dist/markdown-it-vue.css'
+import HljsExtend from './plugins/highlightjs-extend'
 
 if (process.env.NODE_ENV === 'dev') {
   const { mockXHR } = require('../mock')
@@ -24,6 +25,7 @@ Vue.use(hljs.vuePlugin)
 Vue.use(Drag)
 Vue.use(DragAside)
 Vue.use(MarkdownItVue)
+Vue.use(HljsExtend.HljsEvent)
 
 Vue.config.productionTip = false
 
