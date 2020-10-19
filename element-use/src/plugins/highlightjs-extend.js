@@ -61,6 +61,8 @@ function hoverCodeLineInternal() {
           const newClass = oldClass.replace(/current-row/g, '')
           line.setAttribute('class', newClass)
         }
+        document.onmouseover = null
+        document.onmouseout = null
       }
     }
   })
