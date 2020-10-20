@@ -1,9 +1,10 @@
 <template>
   <div style="text-align: left;">
     <!-- bind to a data property named `code` -->
-    <highlightjs autodetect :code="content" />
+    <highlightjs id="svView1" autodetect :code="content" />
     <!-- or literal code works as well -->
-    <highlightjs :language="contentLang" code="var x = 5;" />
+    <highlightjs id="svView2" :language="contentLang" code="var x = 5;" />
+    <el-button size="small" type="primary" @click="print">Print</el-button>
   </div>
 </template>
 
@@ -42,6 +43,25 @@ export default {
   computed: {
   },
   methods: {
+    print() {
+      const head = document.getElementsByTagName('head')[0]
+      var headStr = ''
+      const styles = head.getElementsByTagName('style')
+      styles.forEach(function(style) {
+        headStr = headStr + style.outerHTML
+      })
+      var printStr = '<html><head>' + headStr + '<style>code { page-break-after:always }</style></head><body>'
+      var content = ''
+      var str = document.getElementById('svView1').innerHTML
+      content = content + str
+      str = document.getElementById('svView2').innerHTML
+      content = content + str
+      printStr = printStr + content + '</body></html>'
+      var pwin = window.open('Print.htm', 'print')
+      pwin.document.write(printStr)
+      pwin.document.close()
+      pwin.print()
+    },
   },
   
 }
