@@ -89,17 +89,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
-    document.title = to.meta.title;
+    document.title = to.meta.title
     const icon = document.getElementById('titleIcon')
     if (icon) {
-      const find = icon.href.lastIndexOf('/')
-      if (find !== -1) {
-        const left = icon.href.substring(0, find + 1)
-        if (to.meta.icon) {
-          icon.href = left + to.meta.icon
-        } else {
-          icon.href = left + 'favicon.ico'
-        }
+      if (to.meta.icon) {
+        icon.href = '/' + to.meta.icon
+      } else {
+        icon.href = '/favicon.ico'
       }
     }
   }
