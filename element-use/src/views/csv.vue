@@ -40,6 +40,8 @@
       <el-button type="primary" @click="exportCsv()">下载</el-button>
     </el-upload>
     <input  type="file" id="files" ref="refFile" v-on:change="importCsv" />
+    <p id="test-jsonp"></p>
+    <el-button size="small" type="primary" @click="getPrice">reflash</el-button>
   </div>
 </template>
 
@@ -79,6 +81,24 @@ export default {
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val
+    },
+    refreshPrice(data) {
+      if (data) {
+        var p = document.getElementById('test-jsonp')
+        p.innerHTML = '当前价格：' +
+            data['0000001'].name +': ' + 
+            data['0000001'].price + '；' +
+            data['1399001'].name + ': ' +
+            data['1399001'].price
+      }
+    },
+    getPrice() {
+      var
+          js = document.createElement('script'),
+          head = document.getElementsByTagName('head')[0]
+          window.refreshPrice = this.refreshPrice
+      js.src = 'http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice'
+      head.appendChild(js)
     },
     /**
     * by wjw
