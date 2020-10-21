@@ -1,11 +1,16 @@
 <template>
   <div style="text-align: left;">
-    <markdown-it-vue ref="sv-md" class="md-body" :content="'```\n' + content + '\n```'" />
+    <div id="printJS-obj">
+      <markdown-it-vue ref="sv-md" class="md-body" :content="'```\n' + content + '\n```'" />
+      <markdown-it-vue ref="sv-md" class="md-body" :content="'```\n' + content + '\n```'" />
+    </div>
+    <el-button size="small" type="primary" @click="print">Print</el-button>
   </div>
 </template>
 
 <script>
 import '../plugins/highlightjs-line-numbers'
+import printJS from 'print-js'
 // import HljsExtend from '../plugins/highlightjs-extend'
 
 function addLineNumbers() {
@@ -39,6 +44,51 @@ export default {
   computed: {
   },
   methods: {
+    print() {
+      const head = document.getElementsByTagName('head')[0]
+      var headStr = ''
+      const styles = head.getElementsByTagName('style')
+      styles.forEach(function(style) {
+        headStr = headStr + style.innerHTML
+      })
+      printJS({
+        printable: 'printJS-obj',
+        fallbackPrintable: null,
+        type: 'html',
+        header: '<div id="nav"><a href="/tree" class="">Tree</a> | <a href="/code1" class="">Code View 1</a> | <a href="/code2" class="">Code View 2</a> | <a href="/code3" class="router-link-exact-active router-link-active" aria-current="page">Code View 3</a> | <a href="/dragDiv" class="">Drag Div</a> | <a href="/dragView" class="">Drag View</a> | <a href="/dragView2" class="">Drag View2</a> | <a href="/dragView3" class="">Drag View3</a> | <a href="/csv" class="">csv</a></div>',
+        headerStyle: 'font-weight: 300;',
+        maxWidth: 800,
+        properties: null,
+        gridHeaderStyle: 'font-weight: bold; padding: 5px; border: 1px solid #dddddd;',
+        gridStyle: 'border: 1px solid lightgray; margin-bottom: -1px;',
+        showModal: false,
+        onError: (error) => { throw error },
+        onLoadingStart: null,
+        onLoadingEnd: null,
+        onPrintDialogClose: () => {},
+        onIncompatibleBrowser: () => {},
+        modalMessage: 'Retrieving Document...',
+        frameId: 'printJS',
+        printableElement: null,
+        documentTitle: 'Document',
+        targetStyle: ['clear', 'display'], // ['clear', 'display', 'width', 'min-width', 'height', 'min-height', 'max-height'],
+        targetStyles: ['border', 'box', 'break', 'text-decoration'], // ['border', 'box', 'break', 'text-decoration'],
+        ignoreElements: [],
+        repeatTableHeader: true,
+        css: null,
+        style: headStr,
+        scanStyles: true,
+        base64: false,
+
+        // Deprecated
+        onPdfOpen: null,
+        font: 'TimesNewRoman',
+        font_size: '12pt',
+        honorMarginPadding: true,
+        honorColor: false,
+        imageStyle: 'max-width: 100%;'
+      })
+    }
   }
 }
 </script>
@@ -95,6 +145,10 @@ export default {
 code {
   white-space: pre-wrap;
   overflow: auto;
+}
+
+.md-body + .md-body{
+  page-break-before: always;
 }
 
 // .hljs-ln tr.current-row>td {
