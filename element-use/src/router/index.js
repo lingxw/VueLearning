@@ -76,6 +76,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'Csv'
     }
+  },
+  {
+    path: '/print',
+    name: 'print',
+    component: () => import('../views/print.vue'),
+    meta: {
+      title: 'print'
+    }
   }
 ]
 
