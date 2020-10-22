@@ -198,13 +198,15 @@ export default {
       }
       const printElement = document.getElementById('printJS-obj')
       const printClone = this.cloneElement(printElement, params)
-      const thead = printClone.querySelectorAll('.el-table__header thead')[0]
-      const bodyTable = printClone.querySelectorAll('.el-table__body')[0]
+      const thead = printClone.querySelector('.el-table__header thead')
+      const bodyTable = printClone.querySelector('.el-table__body')
       bodyTable.insertBefore(thead, bodyTable.children[1])
       const headerContainer = document.createElement('div')
       headerContainer.innerHTML = params.header
       printClone.insertBefore(headerContainer, printClone.childNodes[0])
-      const headerTable = printClone.querySelectorAll('.el-table__header')[0]
+      const hidden = printClone.querySelector('.hidden-columns')
+      hidden.parentNode.removeChild(hidden)
+      const headerTable = printClone.querySelector('.el-table__header-wrapper')
       headerTable.parentNode.removeChild(headerTable)
       params.printable = printClone.outerHTML
       printJS(params)
