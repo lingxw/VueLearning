@@ -1,25 +1,60 @@
 <template>
   <div style="text-align: left;">
-    <el-table
-      id="printJS-obj"
-      ref="singleTable"
-      :data="someJSONdata"
-      border
-      highlight-current-row
-      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-      height="400px"
-    >
-      <el-table-column
-        type="index"
-      />
-      <el-table-column
-          v-for="(item) in properties"
-          :key="item.field"
-          :prop="item.field"
-          :label="item.displayName"
-          sortable
-      />
-    </el-table>
+    <div id="printJS-obj">
+      <el-table
+        ref="singleTable"
+        :data="someJSONdata"
+        border
+        highlight-current-row
+        :header-cell-style="{background:'#eef1f6',color:'#606266'}"
+        height="400px"
+      >
+        <el-table-column
+          type="index"
+        />
+        <el-table-column
+            v-for="(item) in properties"
+            :key="item.field"
+            :prop="item.field"
+            :label="item.displayName"
+            sortable
+        />
+      </el-table>
+    </div>
+    <TABLE class="add-row" border="0" style="font-size:9pt;" width="300px" align="center">
+        <THEAD style="display:table-header-group;font-weight:bold">
+          <TR><TD colspan="2" align="center" style="font-weight:bold;border:3px double red">每页都有的表头</TD></TR>
+        </THEAD>
+      <TBODY style="text-align:center">
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR style="page-break-after:always;"><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR style="page-break-after:always;"><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR><TD>表格内容</TD><TD>表格内容</TD></TR>
+        <TR style="page-break-after:always;"><TD>表格内容</TD><TD>表格内容</TD></TR>
+      </TBODY>
+      <TFOOT style="display:table-footer-group;font-weight:bold">
+        <TR>
+          <TD colspan="2" align="center" style="font-weight:bold;border:3px double blue">每页都有的表尾</TD>
+        </TR>
+      </TFOOT>
+    </TABLE>
+    <input type=button value=" 打  印 " οnclick="javascript:window.print()">
     <el-button size="small" type="primary" @click="print">Print</el-button>
     <el-button size="small" type="primary" @click="printMy">My Print</el-button>
     <el-button size="small" type="primary" @click="printJson">Print with custom table header text</el-button>
@@ -223,7 +258,7 @@ export default {
         fallbackPrintable: null,
         type: 'html',
         header: '<div id="nav"><a href="/tree" class="">Tree</a> | <a href="/code1" class="">Code View 1</a> | <a href="/code2" class="">Code View 2</a> | <a href="/code3" class="router-link-exact-active router-link-active" aria-current="page">Code View 3</a> | <a href="/dragDiv" class="">Drag Div</a> | <a href="/dragView" class="">Drag View</a> | <a href="/dragView2" class="">Drag View2</a> | <a href="/dragView3" class="">Drag View3</a> | <a href="/csv" class="">csv</a></div>',
-        headerStyle: 'font-weight: 300;',
+        headerStyle: 'font-weight: 300;position:fixed;top:0;',
         maxWidth: 800,
         properties: null,
         gridHeaderStyle: 'font-weight: bold; padding: 5px; border: 1px solid #dddddd;',
@@ -259,3 +294,35 @@ export default {
   }
 }
 </script>
+
+<style>
+@media print {
+  @page {
+    size: A4 landscape;
+  }
+  /* #printJS-obj>div:first-child {
+    position:fixed;
+    top:0;
+    height: 30px;
+  }
+  #printJS-obj .el-table {
+    margin-top: 30px;
+  }  */
+
+  tr {
+    page-break-inside: avoid;
+  }
+}
+
+.add-row {
+  counter-reset: pageCur 0;
+}
+.add-row tbody>tr:before {
+  counter-increment: pageCur;
+  content: counter(pageCur);
+}
+
+#printJS-obj .el-table__row:nth-child(17n) {
+  background:#ff0000;
+}
+</style>

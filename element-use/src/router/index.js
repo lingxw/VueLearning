@@ -84,6 +84,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'print'
     }
+  },
+  {
+    path: '/SequenceDiagrams',
+    name: 'SequenceDiagrams',
+    component: () => import('../views/SequenceDiagrams.vue'),
+    meta: {
+      title: 'SequenceDiagrams'
+    }
   }
 ]
 
