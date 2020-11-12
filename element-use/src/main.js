@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === 'dev') {
   mockXHR()
 }
 
+hljs.registerLanguage('jcl', require('./plugins/hl-jcl'));
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(Highlight)
 Vue.use(hljs.vuePlugin)

@@ -3,7 +3,7 @@
     <!-- bind to a data property named `code` -->
     <highlightjs id="svView1" autodetect :code="content" />
     <!-- or literal code works as well -->
-    <highlightjs id="svView2" :language="contentLang" code="var x = 5;" />
+    <highlightjs id="svView2" :language="contentLang" :code="contentJcl" />
     <el-button size="small" type="primary" @click="print">Print</el-button>
   </div>
 </template>
@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       content: 'import hljs from \'highlight.js\'\nimport \'highlight.js/styles/googlecode.css\'\n\nlet Highlight = {} // comment',
-      contentLang: 'javascript'
+      contentLang: 'jcl',
+      contentJcl: '#@PLANET1#AA\n#@PLANET2#2002/01/012002/01/0112:00USER1\n#@PLANET3#ACCES.JCLLIB\n//**  ＳＴ２１１４Ａ　プログラム　                **\n//ST214A JOB 1,ST214A,MSGLEVEL=(1,1),NOTIFY=&SYSUID\n//STEP1 EXEC PROC=IGYWCLG\n//COBOL.SYSIN DD DSN="ST214.COBOL.SOURCE(LAB1)",DISP=SHR\n//LKED.SYSLMOD DD DSNAME=ST214.LOADLIB(LAB1),DISP=SHR\n'
     }
   },
   created() {
@@ -122,5 +123,14 @@ code {
 
 .hljs-ln tr.current-row>td {
   background-color: #ecf5ff;
+}
+
+#svView2 .hljs-comment,
+#svView2 .hljs-quote {
+  font-style: normal;
+}
+
+.hljs-planet-comment {
+  color: rgb(30, 184, 132);
 }
 </style>

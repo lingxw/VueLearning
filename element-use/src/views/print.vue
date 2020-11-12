@@ -236,14 +236,21 @@ export default {
       const thead = printClone.querySelector('.el-table__header thead')
       const bodyTable = printClone.querySelector('.el-table__body')
       bodyTable.insertBefore(thead, bodyTable.children[1])
-      const headerContainer = document.createElement('div')
-      headerContainer.innerHTML = params.header
-      printClone.insertBefore(headerContainer, printClone.childNodes[0])
+      // const headerContainer = document.createElement('div')
+      // headerContainer.innerHTML = params.header
+      // printClone.insertBefore(headerContainer, printClone.childNodes[0])
       const hidden = printClone.querySelector('.hidden-columns')
       hidden.parentNode.removeChild(hidden)
       const headerTable = printClone.querySelector('.el-table__header-wrapper')
       headerTable.parentNode.removeChild(headerTable)
-      params.printable = printClone.outerHTML
+
+      const pageMax = Math.ceil(47 / 16)
+      let pages = ''
+      for (let i = 0; i < pageMax; i++) {
+        pages = pages + '<span class="page">/' + pageMax + '</span>'
+      }
+
+      params.printable = printClone.outerHTML + '<p class="print-page">' + pages + '</p>'
       printJS(params)
     },
     print() {
@@ -295,7 +302,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 @media print {
   @page {
     size: A4 landscape;
@@ -319,6 +326,27 @@ export default {
 }
 .add-row tbody>tr:before {
   counter-increment: pageCur;
+  content: counter(pageCur);
+}
+
+.print-page{
+  counter-reset: pageCur 0;
+  .page-loop(6);
+}
+
+.page-loop(@n, @i:1) when (@i <= @n) {
+  & .page:nth-child(@{i}) {
+    top: calc(33px + 716px * (@i - 1));
+  }
+  .page-loop(@n, (@i + 1));
+}
+
+.page {
+  position: absolute;
+  right: 55px;
+  counter-increment: pageCur;
+}
+.page:before {
   content: counter(pageCur);
 }
 
