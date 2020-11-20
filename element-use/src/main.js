@@ -13,11 +13,12 @@ import DragAside from './plugins/dragAside'
 import MarkdownItVue from 'markdown-it-vue'
 import 'markdown-it-vue/dist/markdown-it-vue.css'
 import HljsExtend from './plugins/highlightjs-extend'
+import '@/icons'
 
-if (process.env.NODE_ENV === 'dev') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'dev') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 
 hljs.registerLanguage('jcl', require('./plugins/hl-jcl'));
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
