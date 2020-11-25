@@ -1,9 +1,11 @@
 <template>
-  <div id="image" style="text-align: left;">
-    <!-- bind to a data property named `code` -->
-    <highlightjs id="svView1" autodetect :code="content" />
-    <!-- or literal code works as well -->
-    <highlightjs id="svView2" :language="contentLang" :code="contentJcl" />
+  <div style="text-align: left;">
+    <div id="image">
+      <!-- bind to a data property named `code` -->
+      <highlightjs id="svView1" autodetect :code="content" />
+      <!-- or literal code works as well -->
+      <highlightjs id="svView2" :language="contentLang" :code="contentJcl" />
+    </div>
     <el-button size="small" type="primary" @click="print">Print</el-button>
     <el-button size="small" type="primary" @click="exportXlsx_table_to_book">excel table_to_book</el-button>
     <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">
@@ -13,6 +15,9 @@
     <el-button size="small" type="primary" @click="exportByMsExcel">exportByMsExcel</el-button>
     <el-button size="small" type="primary" @click="exportMy">my export</el-button>
     <el-button size="small" type="primary" @click="convertHtmlTobmp">htmlTobmp</el-button>
+    <el-button size="small" type="primary" @click="cropImg">CropImg</el-button>
+    <span>fragments:</span>
+    <div id="fragments"></div>
   </div>
 </template>
 
@@ -27,6 +32,7 @@ import { saveAs } from 'file-saver'
 import { exportToExcel } from '../plugins/exportExcel'
 import html2canvas from 'html2canvas'
 import Canvas2Image from '../plugins/canvas2image'
+import imgCrop from '../plugins/imgCrop'
 
 function addLineNumbers() {
   hljs.initLineNumbersOnLoad({ 
@@ -146,10 +152,10 @@ export default {
     },
     convertHtmlTobmp() {
       var targetDom = document.getElementById('image')
-      var copyDom = targetDom.cloneNode()
-      copyDom = targetDom.width + "px"
-      copyDom = targetDom.height + "px"
-      html2canvas(copyDom, {
+      // var copyDom = targetDom.cloneNode()
+      // copyDom = targetDom.width + "px"
+      // copyDom = targetDom.height + "px"
+      html2canvas(targetDom, {
         // backgroundColor: null,
         backgroundColor: "transparent",
         allowTaint: true,
@@ -158,6 +164,23 @@ export default {
         const canvasWidth = canvas.width;
         const canvasHeight = canvas.height;
         Canvas2Image.saveAsPNG(canvas, canvasWidth, canvasHeight, 'sv')
+      })
+    },
+    cropImg() {
+      var targetDom = document.getElementById('image')
+      // var copyDom = targetDom.cloneNode()
+      // copyDom = targetDom.width + "px"
+      // copyDom = targetDom.height + "px"
+      html2canvas(targetDom, {
+        // backgroundColor: null,
+        backgroundColor: "transparent",
+        allowTaint: true,
+        useCORS: true 
+      }).then((canvas)=>{
+        const canvasWidth = canvas.width
+        const canvasHeight = canvas.height
+        const url = canvas.toDataURL('png')
+        imgCrop.makeFragments('fragments', url, canvasWidth, canvasHeight)
       })
     }
   }
@@ -228,5 +251,13 @@ code {
 
 .hljs-planet-comment {
   color: rgb(30, 184, 132);
+}
+
+#fragments{
+  background-color: darkcyan;
+}
+
+#fragTable{
+	border-collapse: collapse;
 }
 </style>
