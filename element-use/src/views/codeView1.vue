@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: left;">
+  <div id="image" style="text-align: left;">
     <!-- bind to a data property named `code` -->
     <highlightjs id="svView1" autodetect :code="content" />
     <!-- or literal code works as well -->
@@ -12,6 +12,7 @@
     <el-button size="small" type="primary" @click="exportByExecljs">exportByExecljs</el-button>
     <el-button size="small" type="primary" @click="exportByMsExcel">exportByMsExcel</el-button>
     <el-button size="small" type="primary" @click="exportMy">my export</el-button>
+    <el-button size="small" type="primary" @click="convertHtmlTobmp">htmlTobmp</el-button>
   </div>
 </template>
 
@@ -24,6 +25,8 @@ import XLSX from 'xlsx'
 import Excel from 'exceljs'
 import { saveAs } from 'file-saver'
 import { exportToExcel } from '../plugins/exportExcel'
+import html2canvas from 'html2canvas'
+import Canvas2Image from '../plugins/canvas2image'
 
 function addLineNumbers() {
   hljs.initLineNumbersOnLoad({ 
@@ -140,6 +143,22 @@ export default {
     },
     exportMy() {
       exportToExcel('sheetjs.xls', '#svView2')
+    },
+    convertHtmlTobmp() {
+      var targetDom = document.getElementById('image')
+      var copyDom = targetDom.cloneNode()
+      copyDom = targetDom.width + "px"
+      copyDom = targetDom.height + "px"
+      html2canvas(copyDom, {
+        // backgroundColor: null,
+        backgroundColor: "transparent",
+        allowTaint: true,
+        useCORS: true 
+      }).then((canvas)=>{
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        Canvas2Image.saveAsPNG(canvas, canvasWidth, canvasHeight, 'sv')
+      })
     }
   }
 }
