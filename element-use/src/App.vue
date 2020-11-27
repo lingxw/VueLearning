@@ -11,7 +11,7 @@
       <router-link to="/dragView3">Drag View3</router-link> |
       <router-link to="/csv">csv</router-link> |
       <router-link to="/print">print</router-link> |
-      <router-link to="/SequenceDiagrams">SequenceDiagrams</router-link>
+      <router-link to="/ocrView">ocrView</router-link>
     </div>
     <router-view/>
   </div>

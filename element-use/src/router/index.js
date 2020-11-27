@@ -86,11 +86,11 @@ Vue.use(VueRouter)
     }
   },
   {
-    path: '/SequenceDiagrams',
-    name: 'SequenceDiagrams',
-    component: () => import('../views/SequenceDiagrams.vue'),
+    path: '/ocrView',
+    name: 'ocrView',
+    component: () => import('../views/ocrView.vue'),
     meta: {
-      title: 'SequenceDiagrams'
+      title: 'ocrView'
     }
   }
 ]
