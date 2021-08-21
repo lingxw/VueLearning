@@ -92,6 +92,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'ocrView'
     }
+  },
+  {
+    path: '/graphView',
+    name: 'graphView',
+    component: () => import('../views/graph.vue'),
+    meta: {
+      title: 'graph'
+    }
   }
 ]
 

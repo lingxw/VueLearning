@@ -14,6 +14,7 @@ import MarkdownItVue from 'markdown-it-vue'
 import 'markdown-it-vue/dist/markdown-it-vue.css'
 import HljsExtend from './plugins/highlightjs-extend'
 import '@/icons'
+import joint from './plugins/joint'
 
 // if (process.env.NODE_ENV === 'dev') {
 //   const { mockXHR } = require('../mock')
@@ -28,6 +29,7 @@ Vue.use(Drag)
 Vue.use(DragAside)
 Vue.use(MarkdownItVue)
 Vue.use(HljsExtend.HljsEvent)
+Vue.use(joint)
 
 Vue.config.productionTip = false
 

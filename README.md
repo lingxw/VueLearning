@@ -17,6 +17,7 @@
     npm install highlight.js
     npm install highlightjs-line-numbers.js
     npm install papaparse
+    npm install jointjs --save
     ```
 * 项目运行
     ```
