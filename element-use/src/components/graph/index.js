@@ -3,7 +3,7 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     var graph = new joint.dia.Graph();
     var paper = new joint.dia.Paper({
         el: document.getElementById(paperId),
-        width: 800,
+        width: 850,
         height: 600,
         model: graph,
         async: true,
@@ -26,6 +26,29 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     });
 
     paper.el.style.border = '1px solid #E2E2E2';
+    const addZoomListeners = paper => {
+      let zoomLevel = 1
+      const zoom = zoomLevel => {
+        paper.scale(zoomLevel)
+        var size = paper.getComputedSize();
+        paper.translate(0,0);
+        paper.scale(zoomLevel, zoomLevel, size.width / 2, size.height / 2)
+        // paper.fitToContent({ useModelGeometry: true, padding: 100 * zoomLevel, allowNewOrigin: 'any' })
+      }
+      document.getElementById('zoom-in').addEventListener('click', () => {
+        zoomLevel = Math.min(3, zoomLevel + 0.2)
+        zoom(zoomLevel)
+      })
+      document.getElementById('zoom-out').addEventListener('click', () => {
+        zoomLevel = Math.max(0.2, zoomLevel - 0.2)
+        zoom(zoomLevel)
+      })
+      document.getElementById('reset').addEventListener('click', function() {
+        zoomLevel = 1
+        zoom(zoomLevel)
+      })
+    }
+    addZoomListeners(paper)
 
     var Container = joint.shapes.container.Parent;
     var Child = joint.shapes.container.Child;
@@ -39,7 +62,7 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     var container_b = new Container({
         z: 3,
         size: { width: 50, height: 50 },
-        attrs: { headerText: { text: 'Container B' }}
+        attrs: { header: {stroke: '#E546A8', fill: '#E546A8'}, headerText: { text: 'Container B' }}
     });
 
     var child_1 = new Child({

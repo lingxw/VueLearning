@@ -1,6 +1,12 @@
 <template>
     <div>
-        <h1>Paper</h1>
+        <div class="toolbar">
+          <i id="zoom-in" class="el-icon-zoom-in"></i>
+          <i id="zoom-out" class="el-icon-zoom-out"></i>
+          <i id="reset" class="el-icon-refresh"></i>
+          <el-divider direction="vertical"></el-divider>
+          <i id="setting" class="el-icon-setting"></i>
+        </div>
         <div id='paper'/>
         <div id='paper1'/>
     </div>
@@ -26,8 +32,8 @@ export default {
   methods: {
     initGraph(joint) {
         JointContainer.createGraph(joint);
-        JointPaper.initPaper(joint, 'paper', true, false);
-        JointPaper.initPaper(joint, 'paper1', false, 'manhattan');
+        JointPaper.initPaper(joint, 'paper', false, false);
+        JointPaper.initPaper(joint, 'paper1', true, 'manhattan');
     }
   }
 }
