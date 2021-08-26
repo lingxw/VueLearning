@@ -1,5 +1,12 @@
 function createGraph(joint) {
 
+    var childHeight = 26
+    var childWidth = 50
+    var headerHeight = 30;
+    var headerWidth = childWidth + padding * 2
+    var buttonSize = 14;
+    var padding = 10
+
     joint.shapes.standard.Link.define('container.Link', {
         attrs: {
             line: {
@@ -10,11 +17,39 @@ function createGraph(joint) {
                     'fill': 'none'
                 }
             }
+        },
+        labels: [
+            {
+                attrs: { text: { text: 'ref' }},
+                position: {
+                  offset: 15,
+                  distance: 0.5
+                }
+            }
+        ]
+      }, {
+        setDep: function(dep, shows) {
+          if (dep) {
+            this.dep = dep
+            if (shows) {
+              shows.forEach(el => {
+                if (el.kind === this.dep.kind) {
+                  this.appendLabel({
+                    attrs: { text: { text: el.name }},
+                    position: {
+                      offset: 15,
+                      distance: 0.5
+                    }
+                  })
+                }
+              })
+            }
+          }
         }
-    });
+      })
 
     joint.dia.Element.define('container.Child', {
-        size: { width: 50, height: 50 },
+        size: { width: childWidth, height: childHeight },
         attrs: {
             root: {
                 magnetSelector: 'body'
@@ -54,11 +89,25 @@ function createGraph(joint) {
         }, {
             tagName: 'text',
             selector: 'label'
-        }]
-    });
-
-    var headerHeight = 30;
-    var buttonSize = 14;
+        }],
+    // comp: {id, kind, name, attrs: {disp, mark}}
+    // shows: [{kind:'child', icon: 'M 2 7 12 7 M 7 2 7 12', stroke：'#2F8AF1', fill:'#B5D6FC'}]
+    setComp: function(comp, shows) {
+        if (comp) {
+          this.comp = comp
+          this.attr('body/title', this.comp.kind)
+          this.attr('label/text', this.comp.name)
+        }
+        if (shows) {
+          shows.forEach(el => {
+            if (el.kind === this.comp.kind) {
+              this.attr('body/stroke', el.stroke)
+              this.attr('body/fill', el.fill)
+            }
+          })
+        }
+      }
+    })
 
     joint.dia.Element.define('container.Parent', {
         collapsed: false,
@@ -152,13 +201,12 @@ function createGraph(joint) {
                 selector: 'buttonIcon'
             }]
         }],
-
         toggle: function(shouldCollapse) {
             var buttonD;
             var collapsed = (shouldCollapse === undefined) ? !this.get('collapsed') : shouldCollapse;
             if (collapsed) {
                 buttonD = 'M 2 7 12 7 M 7 2 7 12';
-                this.resize(140, 30);
+                this.resize(headerWidth, headerHeight);
             } else {
                 buttonD = 'M 2 7 12 7';
                 this.fitChildren();
@@ -181,7 +229,30 @@ function createGraph(joint) {
                     bottom: padding
                 }
             });
+        },
+      // comp: {id, kind, name, attrs: {disp, mark}}
+      // shows: [{kind:'child', icon: 'M 2 7 12 7 M 7 2 7 12', stroke：'#2F8AF1', fill:'#B5D6FC'}]
+      setComp: function(comp, shows) {
+        if (comp) {
+          this.comp = comp
+          this.set('comp', comp)
+          this.attr('header/title', this.comp.kind)
+          this.attr('headerText/title', this.comp.kind)
+          this.attr('headerIcon/title', this.comp.kind)
+          this.attr('headerText/text', this.comp.name)
         }
+        if (shows) {
+          shows.forEach(el => {
+            if (el.kind === this.comp.kind) {
+              this.attr('body/stroke', el.stroke)
+              this.attr('header/stroke', el.stroke)
+              this.attr('header/fill', el.fill)
+              this.attr('headerIcon/d', el.icon)
+            }
+          })
+        }
+        this.resize(headerWidth, headerHeight)
+      }
     });
 
 }
