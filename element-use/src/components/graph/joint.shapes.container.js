@@ -111,6 +111,7 @@ function createGraph(joint) {
 
     joint.dia.Element.define('container.Parent', {
         collapsed: false,
+        size: { width: childWidth, height: childHeight },
         attrs: {
             root: {
                 magnetSelector: 'body'

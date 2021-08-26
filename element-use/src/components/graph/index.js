@@ -139,6 +139,8 @@ function initPaper(joint, paperId, embedFlag, routerName) {
 
     var link_1_b = new Link({
         z: 4,
+        // source: { id: child_1.id },
+        // target: { id: container_b.id }
         source: { id: child_1.id },
         target: { id: child_4.id }
     });
@@ -169,6 +171,9 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     link_1_3.reparent();
     link_4_5.reparent();
     link_1_b.reparent();
+
+    // container_b.toggle(false);
+    // container_a.toggle(false);
 
     joint.layout.DirectedGraph.layout(graph, {
         // nodeSep: 10,
