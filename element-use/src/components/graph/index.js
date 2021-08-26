@@ -144,6 +144,7 @@ function initPaper(joint, paperId, embedFlag, routerName) {
         source: { id: child_1.id },
         target: { id: child_4.id }
     });
+
     link_1_b.setDep({kind: 1}, depShows)
 
     if (routerName) {

@@ -1,13 +1,14 @@
 function createGraph(joint) {
 
     var childHeight = 26
-    var childWidth = 50
+    var childWidth = 120
     var headerHeight = 30;
+    var padding = 10
     var headerWidth = childWidth + padding * 2
     var buttonSize = 14;
-    var padding = 10
 
     joint.shapes.standard.Link.define('container.Link', {
+        dep: null,
         attrs: {
             line: {
                 stroke: '#222222',
@@ -17,16 +18,7 @@ function createGraph(joint) {
                     'fill': 'none'
                 }
             }
-        },
-        labels: [
-            {
-                attrs: { text: { text: 'ref' }},
-                position: {
-                  offset: 15,
-                  distance: 0.5
-                }
-            }
-        ]
+        }
       }, {
         setDep: function(dep, shows) {
           if (dep) {
@@ -49,6 +41,7 @@ function createGraph(joint) {
       })
 
     joint.dia.Element.define('container.Child', {
+        comp: null,
         size: { width: childWidth, height: childHeight },
         attrs: {
             root: {
@@ -110,10 +103,12 @@ function createGraph(joint) {
     })
 
     joint.dia.Element.define('container.Parent', {
+        comp: null,
         collapsed: false,
-        size: { width: childWidth, height: childHeight },
+        // size: { width: childWidth, height: childHeight },
         attrs: {
             root: {
+                // magnet: false,
                 magnetSelector: 'body'
             },
             shadow: {
