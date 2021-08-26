@@ -97,6 +97,7 @@ Vue.use(VueRouter)
     path: '/graphView',
     name: 'graphView',
     component: () => import('../views/graph.vue'),
+    // component: () => import('../components/diagram6/index.vue'),
     meta: {
       title: 'graph'
     }
