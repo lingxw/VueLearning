@@ -8,8 +8,10 @@ export default {
     const graphlib = require('graphlib')
     Object.defineProperty(Vue.prototype, '$joint', { value: joint })
     //Object.defineProperty(Vue.prototype, '$', { value: jq })
-    window.$ = jq;
     window.joint = joint;
+    window.$ = jq;
+    window._ = require('lodash');
+    window.V = joint.V;
     window.dagre = dagre;
     window.graphlib = graphlib;
   }

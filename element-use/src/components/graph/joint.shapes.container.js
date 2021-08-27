@@ -21,7 +21,7 @@ function createGraph(joint) {
         }
       }, {
         isHidden: function() {
-            // If the target element is collapsed, we don't want to
+            // If the target/source element is collapsed, we don't want to
             // show the link either
             var targetElement = this.getTargetElement();
             var sourceElement = this.getSourceElement();

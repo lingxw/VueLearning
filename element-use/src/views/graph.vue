@@ -9,12 +9,27 @@
         </div>
         <div id='paper'/>
         <div id='paper1'/>
+        <div id="toolbar">
+            <textarea id="adjacency-list">{
+          'This is\nan element': ['b', 'c'],
+          'b': ['f'],
+          'c': ['e', 'd'],
+          'd': [],
+          'e': [],
+          'f': ['g'],
+          'g': []
+        }</textarea>
+            <br/>
+            <button id="btn-layout">Layout</button>
+        </div>
+        <div id="paper2"></div>
     </div>
 </template>
 
 <script>
 import JointContainer from '../components/graph/joint.shapes.container'
 import JointPaper from '../components/graph/index'
+import autolayout from '../components/AutoLayout/assets/autolayout'
 export default {
   name: 'name',
   components: {
@@ -26,6 +41,7 @@ export default {
   mounted() {
     console.log(`[${this.name}] Mounted`)
     this.initGraph(this.$joint)
+    autolayout.init(window.joint, window._, window.$, window.V, 'paper2')
   },
   computed: {
   },
@@ -38,3 +54,6 @@ export default {
   }
 }
 </script>
+<style scoped>
+  @import "../components/AutoLayout/assets/autolayout.css"
+</style>
