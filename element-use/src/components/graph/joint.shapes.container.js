@@ -20,6 +20,13 @@ function createGraph(joint) {
             }
         }
       }, {
+        isHidden: function() {
+            // If the target element is collapsed, we don't want to
+            // show the link either
+            var targetElement = this.getTargetElement();
+            var sourceElement = this.getSourceElement();
+            return !targetElement || targetElement.isHidden()  || !sourceElement || sourceElement.isHidden();
+        },
         setDep: function(dep, shows) {
           if (dep) {
             this.dep = dep
@@ -36,6 +43,46 @@ function createGraph(joint) {
                 }
               })
             }
+          }
+        }
+      })
+
+      joint.shapes.standard.Link.define('container.VirtualLink', {
+        realLink: null,
+        attrs: {
+            line: {
+                stroke: '#222222',
+                strokeWidth: 1,
+                targetMarker: {
+                    'd': 'M 4 -4 0 0 4 4 M 7 -4 3 0 7 4 M 10 -4 6 0 10 4',
+                    'fill': 'none'
+                }
+            }
+        }
+      }, {
+        isHidden: function() {
+            var hidden = true;
+            if (this.realLink) {
+                if (this.realLink.isHidden()) {
+                    var target = this.getTargetElement();
+                    var source = this.getSourceElement();
+                    var realTarget = this.realLink.getTargetElement();
+                    var realSource = this.realLink.getSourceElement();
+                    if (target === realTarget && source !== realSource) {
+                        hidden = realTarget.isHidden()
+                    } else if (target !== realTarget && source === realSource) {
+                        hidden = realSource.isHidden()
+                    } else if (target !== realTarget && source !== realSource) {
+                        hidden = !(realTarget.isHidden() && realSource.isHidden());
+                    }
+                }
+            }
+
+            return hidden;
+        },
+        setRealLink: function(link) {
+          if (link) {
+            this.realLink = link
           }
         }
       })
@@ -83,6 +130,13 @@ function createGraph(joint) {
             tagName: 'text',
             selector: 'label'
         }],
+        isHidden: function() {
+            // Hide any element or link which is embedded inside a collapsed parent (or parent of the parent).
+            var hidden = this.getAncestors().some(function(ancestor) {
+                return ancestor.isCollapsed();
+            });
+            return hidden;
+        },
     // comp: {id, kind, name, attrs: {disp, mark}}
     // shows: [{kind:'child', icon: 'M 2 7 12 7 M 7 2 7 12', stroke：'#2F8AF1', fill:'#B5D6FC'}]
     setComp: function(comp, shows) {
@@ -105,6 +159,7 @@ function createGraph(joint) {
     joint.dia.Element.define('container.Parent', {
         comp: null,
         collapsed: false,
+        // hidden: false,
         // size: { width: childWidth, height: childHeight },
         attrs: {
             root: {
@@ -173,7 +228,6 @@ function createGraph(joint) {
             }
         }
     }, {
-
         markup: [{
             tagName: 'rect',
             selector: 'shadow'
@@ -209,6 +263,17 @@ function createGraph(joint) {
             }
             this.attr(['buttonIcon','d'], buttonD);
             this.set('collapsed', collapsed);
+        },
+
+        // isHidden: function() {
+        //     return !!this.get('hidden');
+        // },
+        isHidden: function() {
+            // Hide any element or link which is embedded inside a collapsed parent (or parent of the parent).
+            var hidden = this.getAncestors().some(function(ancestor) {
+                return ancestor.isCollapsed();
+            });
+            return hidden;
         },
 
         isCollapsed: function() {

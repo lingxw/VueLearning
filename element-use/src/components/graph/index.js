@@ -16,12 +16,16 @@ function initPaper(joint, paperId, embedFlag, routerName) {
         },
         sorting: joint.dia.Paper.sorting.APPROX,
         viewport: function(view) {
-            var element = view.model;
-            // Hide any element or link which is embedded inside a collapsed parent (or parent of the parent).
-            var hidden = element.getAncestors().some(function(ancestor) {
-                return ancestor.isCollapsed();
-            });
-            return !hidden;
+            // var element = view.model;
+            // // Hide any element or link which is embedded inside a collapsed parent (or parent of the parent).
+            // var hidden = element.getAncestors().some(function(ancestor) {
+            //     return ancestor.isCollapsed();
+            // });
+            // return !hidden;
+            var model = view.model;
+            // Hide elements and links which are currently collapsed
+            if (model.isHidden()) return false;
+            return true;
         }
     });
 
@@ -53,8 +57,8 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     var Container = joint.shapes.container.Parent;
     var Child = joint.shapes.container.Child;
     var Link = joint.shapes.container.Link;
+    var VirtualLink = joint.shapes.container.VirtualLink;
 
-    
     var shows = [
         { kind: 'child', icon: 'M6 0 L0 10 L12 10 Z',
           stroke: '#FFA743', fill: '#F8EFC1' },
@@ -137,26 +141,24 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     });
     link_4_5.setDep({kind: 1}, depShows)
 
-    var link_1_b = new Link({
+    var link_1_4 = new Link({
         z: 4,
-        // source: { id: child_1.id },
-        // target: { id: container_b.id }
         source: { id: child_1.id },
         target: { id: child_4.id }
     });
 
-    link_1_b.setDep({kind: 1}, depShows)
+    link_1_4.setDep({kind: 1}, depShows)
 
     if (routerName) {
         link_1_2.router({ name: routerName }) // manhattan, orthogonal
         link_1_3.router({ name: routerName }) // manhattan, orthogonal
         link_4_5.router({ name: routerName }) // manhattan, orthogonal
-        link_1_b.router({ name: routerName }) // manhattan, orthogonal
+        link_1_4.router({ name: routerName }) // manhattan, orthogonal
     }
     graph.addCells([
         container_a, container_b,
         child_1, child_2, child_3, child_4, child_5,
-        link_1_2, link_1_3, link_4_5, link_1_b
+        link_1_2, link_1_3, link_4_5, link_1_4
     ]);
 
     container_a.embed(child_1);
@@ -171,7 +173,7 @@ function initPaper(joint, paperId, embedFlag, routerName) {
     link_1_2.reparent();
     link_1_3.reparent();
     link_4_5.reparent();
-    link_1_b.reparent();
+    link_1_4.reparent();
 
     // container_b.toggle(false);
     // container_a.toggle(false);
@@ -183,6 +185,44 @@ function initPaper(joint, paperId, embedFlag, routerName) {
         marginY: 10,
         rankDir: 'LR'
       })
+
+    var link_1_b = new VirtualLink({
+        z: 4,
+        source: { id: child_1.id },
+        target: { id: container_b.id }
+    })
+    link_1_b.setRealLink(link_1_4);
+    if (routerName) {
+        link_1_b.router({ name: routerName }) // manhattan, orthogonal
+    }
+    link_1_b.reparent();
+    link_1_b.addTo(graph)
+
+    var link_a_4 = new VirtualLink({
+        z: 4,
+        source: { id: container_a.id },
+        target: { id: child_4.id }
+    })
+    link_a_4.setRealLink(link_1_4);
+    if (routerName) {
+        link_a_4.router({ name: routerName }) // manhattan, orthogonal
+    }
+    link_a_4.reparent();
+    link_a_4.addTo(graph)
+
+    if (!embedFlag) {
+        var link_a_b= new VirtualLink({
+            z: 4,
+            source: { id: container_a.id },
+            target: { id: container_b.id }
+        })
+        link_a_b.setRealLink(link_1_4);
+        if (routerName) {
+            link_a_b.router({ name: routerName }) // manhattan, orthogonal
+        }
+        link_a_b.reparent();
+        link_a_b.addTo(graph)
+    }
 
     container_b.toggle(false);
     container_a.toggle(false);
