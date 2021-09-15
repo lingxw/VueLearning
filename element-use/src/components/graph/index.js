@@ -1,5 +1,5 @@
 function initPaper(joint, paperId, embedFlag, routerName) {
-
+    var undoManager = require('./undoManager');
     var graph = new joint.dia.Graph();
     var paper = new joint.dia.Paper({
         el: document.getElementById(paperId),
@@ -11,6 +11,11 @@ function initPaper(joint, paperId, embedFlag, routerName) {
             color: '#F3F7F6'
         },
         interactive: { linkMove: false },
+        defaultConnector: {
+            name: 'jumpover',
+            args: {
+              radius: 10
+            }},
         defaultConnectionPoint: {
             name: 'boundary'
         },
@@ -231,6 +236,18 @@ function initPaper(joint, paperId, embedFlag, routerName) {
         var element = elementView.model;
         element.toggle();
         fitAncestors(element);
+
+        // make undo-able
+        undoManager.add({
+            undo: function () {
+                element.toggle();
+                fitAncestors(element);
+            },
+            redo: function () {
+                element.toggle();
+                fitAncestors(element);
+            }
+        });
     });
 
     paper.on('element:pointermove', function(elementView) {

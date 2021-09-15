@@ -32,3 +32,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 https://element.eleme.cn/#/zh-CN
 https://www.webpackjs.com/loaders/
 https://bestofjs.org/
+
+### Layout
+Eclipse Layout Kernel (ELK)ÅF joint\demo\elk cytoscape.js-elk
+DagreÅF joint.layout.DirectedGraph ,  cytoscape.js-dagre
