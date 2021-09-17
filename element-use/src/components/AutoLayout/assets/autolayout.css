@@ -13,8 +13,31 @@
    font-size: 11px;
    padding: 5px;
 }
-#toolbar {
-}
+/* Toolbar */
+.toolbar {
+   height: '90px';
+   text-align: right;
+   background: #F7F8F9;
+ }
+ .toolbar-title {
+   text-align: left;
+ }
+ .toolbar-button {
+   outline: none;
+   background: inherit;
+   padding: 3px 0px;
+   font-size: 16px;
+   text-align: right;
+   color: #222222;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none
+ }
+ .toolbar-button:hover {
+   background: #FFFFFF;
+ }
 #btn-layout {
    font-family: Arial, Helvetica, sans-serif;
    font-size: 14px;

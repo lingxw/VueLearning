@@ -9,6 +9,18 @@
           <i id="redo" class="el-icon-refresh-right" @click="redo"></i>
           <el-divider direction="vertical"></el-divider>
           <i id="setting" class="el-icon-setting"></i>
+          <el-select v-model="selectCompId" placeholder="" style="float: left;" @change="changeComp">
+            <el-option
+              key="s-1"
+              label="1"
+              value="s-1"
+            />
+          <el-option
+            key="2-2"
+            label="2"
+            value="2-2"
+          />
+          </el-select>
         </div>
         <div id='paper'/>
         <div id='paper1'/>
@@ -39,9 +51,17 @@ export default {
   name: 'name',
   components: {
   },
+  data() {
+    return {
+      selectCompId: '2-2'
+    }
+  },
   created() {
     this.name = this.$options.name
     console.log(`[${this.name}] Created`)
+    if (this.$route.query.selectCompId) {
+      this.selectCompId = this.$route.query.selectCompId
+    }
   },
   mounted() {
     console.log(`[${this.name}] Mounted`)
@@ -53,14 +73,26 @@ export default {
   methods: {
     initGraph(joint) {
         JointContainer.createGraph(joint);
-        JointPaper.initPaper(joint, 'paper', false, false);
-        JointPaper.initPaper(joint, 'paper1', true, 'manhattan');
+        if (this.selectCompId === '2-2') {
+          JointPaper.initPaper(joint, 'paper', false, false);
+        } else {
+          JointPaper.initPaper(joint, 'paper', true, 'manhattan');
+        }
     },
     undo() {
       undoManager.undo()
     },
     redo() {
       undoManager.redo()
+    },
+    changeComp() {
+      this.$router.push({
+        path: '/graphView',
+        query: {
+          kind: 'graphView',
+          selectCompId: this.selectCompId
+        }
+      })
     }
   }
 }

@@ -14,7 +14,7 @@
       <router-link to="/ocrView">ocrView</router-link> |
       <router-link to="/graphView">graphView</router-link>
     </div>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
