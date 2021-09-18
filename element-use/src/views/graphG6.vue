@@ -22,33 +22,15 @@
           />
           </el-select>
         </div>
-        <div id='paper'/>
-        <div id='paper1'/>
-        <div id="toolbar">
-            <textarea id="adjacency-list">{
-          'This is\nan element': ['b', 'c'],
-          'b': ['f'],
-          'c': ['e', 'd'],
-          'd': [],
-          'e': [],
-          'f': ['g'],
-          'g': []
-        }</textarea>
-            <br/>
-            <button id="btn-layout">Layout</button>
-        </div>
-        <div id="paper2"></div>
+        <div id='container' height='500px' width='900px' />
     </div>
 </template>
 
 <script>
-import JointContainer from '../components/graph/joint.shapes.container'
-import JointPaper from '../components/graph/index'
-import autolayout from '../components/AutoLayout/assets/autolayout'
-var undoManager = require('../components/graph/undoManager');
+import { createG6 } from '../components/AntvG6/index'
 
 export default {
-  name: 'graph',
+  name: 'g6',
   components: {
   },
   data() {
@@ -59,37 +41,23 @@ export default {
   created() {
     this.name = this.$options.name
     console.log(`[${this.name}] Created`)
-    if (this.$route.query.selectCompId) {
-      this.selectCompId = this.$route.query.selectCompId
-    }
   },
   mounted() {
     console.log(`[${this.name}] Mounted`)
-    this.initGraph(this.$joint)
-    autolayout.init(window.joint, window._, window.$, window.V, 'paper2')
+    createG6()
   },
   computed: {
   },
   methods: {
-    initGraph(joint) {
-        JointContainer.createGraph(joint);
-        if (this.selectCompId === '2-2') {
-          JointPaper.initPaper(joint, 'paper', false, false);
-        } else {
-          JointPaper.initPaper(joint, 'paper', true, 'manhattan');
-        }
-    },
     undo() {
-      undoManager.undo()
     },
     redo() {
-      undoManager.redo()
     },
     changeComp() {
       this.$router.push({
-        path: '/graphView',
+        path: '/g6',
         query: {
-          kind: 'graphView',
+          kind: 'g6',
           selectCompId: this.selectCompId
         }
       })
@@ -98,5 +66,4 @@ export default {
 }
 </script>
 <style scoped>
-  @import "../components/AutoLayout/assets/autolayout.css"
 </style>

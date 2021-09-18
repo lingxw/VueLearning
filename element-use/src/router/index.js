@@ -101,6 +101,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'graph'
     }
+  },
+  {
+    path: '/g6',
+    name: 'g6',
+    component: () => import('../views/graphG6.vue'),
+    meta: {
+      title: 'graph'
+    }
   }
 ]
 
