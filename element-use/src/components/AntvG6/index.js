@@ -206,6 +206,14 @@ export function createG6() {
         source: '5',
         target: '11',
       },
+      {
+        source: '6',
+        target: 'B',
+      },
+      {
+        source: 'A',
+        target: 'C',
+      }
     ],
     combos: [
       {
