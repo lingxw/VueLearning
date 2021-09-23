@@ -1,0 +1,23 @@
+message: 
+    title: '運動ブランド'
+
+placeholder: 
+    enter: 'ご好みのブランドを入力してください'
+
+brands: 
+    nike: 'ナイキ'
+    adi: 'アディダス'
+    nb: '新しいバロン'
+    ln: 'リー・ニン'
+
+button: 
+    ok: '確認'
+    cancel: 'キャンセル'
+
+layer:
+    tips: 'ヒント'
+    toggle: '切り替えを確認しますか?'
+
+date: '日付選択'
+
+selectLang: '言語'

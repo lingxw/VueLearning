@@ -13,14 +13,14 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-      const fileRule = config.module.rule('file')
-      fileRule
+    const fileRule = config.module.rule('file')
+    fileRule
         .test(/\.svg$/)
         .exclude.add(path.resolve(__dirname, './src/icons'))
         .end()
         .use('file-loader')
         .loader('file-loader')
-      config.module
+    config.module
       .rule('jcl')
       .test(/\.jcl$/)
       .use('html-loader')
@@ -28,6 +28,13 @@ module.exports = {
       .options({
         minimize: false
       })
+      .end()
+
+    const csonRule = config.module.rule('cson')
+    csonRule
+      .test(/\.cson$/)
+      .use('cson-loader')
+      .loader('cson-loader')
       .end()
   }
 }

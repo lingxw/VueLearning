@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import locale from 'element-ui/lib/locale';
 import zh from './langs/zh'
-import en from './langs/en'
+import en from './langs/en.json'
+import jp from './langs/ja.cson'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import jaLocale from 'element-ui/lib/locale/lang/ja'
@@ -15,7 +16,7 @@ const LOCALE_KEY = 'localeLanguage'
 const locales = {
     en: Object.assign(en, enLocale),
     zh: Object.assign(zh, zhLocale),
-    ja: jaLocale
+    ja: Object.assign(jp, jaLocale)
 }
 
 const i18n = new VueI18n({

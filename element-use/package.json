@@ -20,6 +20,7 @@
     "@antv/g6": "^4.3.7",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "cson-loader": "^0.1.0",
     "element-ui": "^2.13.2",
     "exceljs": "^4.2.0",
     "file-loader": "^6.2.0",
