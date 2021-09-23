@@ -1,4 +1,6 @@
 import Vue from 'vue'
+
+import i18n from './locales';
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -20,7 +22,6 @@ import joint from './plugins/joint'
 //   const { mockXHR } = require('../mock')
 //   mockXHR()
 // }
-
 hljs.registerLanguage('jcl', require('./plugins/hl-jcl'));
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(Highlight)
@@ -35,6 +36,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  i18n,
   store,
   render: h => h(App)
 }).$mount('#app')

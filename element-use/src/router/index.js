@@ -109,6 +109,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'graph'
     }
+  },
+  {
+    path: '/i18n',
+    name: 'i18n',
+    component: () => import('../views/i18nView.vue'),
+    meta: {
+      title: 'i18n'
+    }
   }
 ]
 
