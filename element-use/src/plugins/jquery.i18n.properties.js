@@ -466,7 +466,7 @@ export function jqueryInstallI18n($) {
         cbSplit._nativeSplit = String.prototype.split;
 
     } // end `if (!cbSplit)`
-    String.prototype.split = function (separator, limit) {
-        return cbSplit(this, separator, limit);
-    };
+    // String.prototype.split = function (separator, limit) {
+    //     return cbSplit(this, separator, limit);
+    // };
 }
