@@ -117,6 +117,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'i18n'
     }
+  },
+  {
+    path: '/propertiesView',
+    name: 'propertiesView',
+    component: () => import('../views/propertiesView.vue'),
+    meta: {
+      title: 'propertiesView'
+    }
   }
 ]
 
