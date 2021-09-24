@@ -1,0 +1,11 @@
+button: 
+    ok: 'OK'
+
+brands: 
+    nb: 'NEWバロン'
+
+date: '選択日付'
+
+arr: 
+    1: 'a1'
+    2: 'b1'

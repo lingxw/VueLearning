@@ -4,6 +4,7 @@ import locale from 'element-ui/lib/locale';
 import zh from './langs/zh'
 import en from './langs/en.json'
 import jp from './langs/ja.cson'
+import myJp from './langs/my_ja.cson'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import jaLocale from 'element-ui/lib/locale/lang/ja'
@@ -23,6 +24,8 @@ const i18n = new VueI18n({
     locale: DEFAULT_LANG,
     messages: locales
 })
+
+i18n.mergeLocaleMessage('ja', myJp)
 
 locale.i18n((key, value) => i18n.t(key, value)) //为了实现element插件的多语言切换
 
