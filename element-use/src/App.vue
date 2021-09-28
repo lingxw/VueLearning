@@ -15,7 +15,8 @@
       <router-link to="/graphView">graphView</router-link> |
       <router-link to="/i18n">i18nView</router-link> |
       <router-link to="/propertiesView">propertiesView</router-link> |
-      <router-link to="/g6">g6</router-link>
+      <router-link to="/g6">g6</router-link> |
+      <router-link to="/hbs">Handlebars</router-link>
     </div>
     <router-view :key="$route.fullPath"/>
   </div>

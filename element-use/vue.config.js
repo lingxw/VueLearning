@@ -36,5 +36,11 @@ module.exports = {
       .use('cson-loader')
       .loader('cson-loader')
       .end()
+    const hbsRule = config.module.rule('hbs')
+    hbsRule
+      .test(/\.hbs$/)
+      .use('handlebars-loader')
+      .loader('handlebars-loader')
+      .end()
   }
 }

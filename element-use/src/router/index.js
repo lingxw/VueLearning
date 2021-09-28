@@ -125,6 +125,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'propertiesView'
     }
+  },
+  {
+    path: '/hbs',
+    name: 'hbs',
+    component: () => import('../views/hbsView.vue'),
+    meta: {
+      title: 'propertiesView'
+    }
   }
 ]
 

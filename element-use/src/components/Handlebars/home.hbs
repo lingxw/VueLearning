@@ -1,0 +1,10 @@
+{{#post}}
+  {{#if author.length}}
+    <h3>{{title}}</h3>
+    <ul>
+      {{#each author}}
+        <li>{{../title}}'s author is {{name}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{{/post}}
