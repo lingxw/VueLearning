@@ -131,7 +131,15 @@ Vue.use(VueRouter)
     name: 'hbs',
     component: () => import('../views/hbsView.vue'),
     meta: {
-      title: 'propertiesView'
+      title: 'hbsView'
+    }
+  },
+  {
+    path: '/glv',
+    name: 'glv',
+    component: () => import('../views/goldenLayoutView.vue'),
+    meta: {
+      title: 'GoldenLayoutView'
     }
   }
 ]

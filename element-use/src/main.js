@@ -17,6 +17,8 @@ import 'markdown-it-vue/dist/markdown-it-vue.css'
 import HljsExtend from './plugins/highlightjs-extend'
 import '@/icons'
 import joint from './plugins/joint'
+import vgl from 'vue-golden-layout'
+import 'golden-layout/src/css/goldenlayout-light-theme.css'
 
 // if (process.env.NODE_ENV === 'dev') {
 //   const { mockXHR } = require('../mock')
@@ -31,6 +33,7 @@ Vue.use(DragAside)
 Vue.use(MarkdownItVue)
 Vue.use(HljsExtend.HljsEvent)
 Vue.use(joint)
+Vue.use(vgl);
 
 Vue.config.productionTip = false
 
