@@ -17,7 +17,8 @@
       <router-link to="/propertiesView">propertiesView</router-link> |
       <router-link to="/g6">g6</router-link> |
       <router-link to="/hbs">Handlebars</router-link> |
-      <router-link to="/glv">GoldenLayout</router-link>
+      <router-link to="/glv">GoldenLayout</router-link> |
+      <router-link to="/glv2">GoldenLayout2</router-link>
     </div>
     <router-view :key="$route.fullPath"/>
   </div>

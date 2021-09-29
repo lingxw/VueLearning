@@ -141,6 +141,14 @@ Vue.use(VueRouter)
     meta: {
       title: 'GoldenLayoutView'
     }
+  },
+  {
+    path: '/glv2',
+    name: 'glv2',
+    component: () => import('../views/goldenLayoutView2.vue'),
+    meta: {
+      title: 'GoldenLayoutView2'
+    }
   }
 ]
 

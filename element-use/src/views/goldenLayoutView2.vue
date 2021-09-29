@@ -2,18 +2,14 @@
   <div>
     <button class="reset" @click="reset">Reset localStorage</button>
     <golden-layout :showPopoutIcon="false" :showMaximiseIcon="true" :showCloseIcon="true" class="hscreen">
-      <gl-col :closable="false">
-        <gl-row>
-          <gl-component title="SourceView">
-            <highlightjs id="svView1" language="jcl" :code="content" />
-          </gl-component>
-          <gl-stack>
-            <gl-component title="component2">
-              <h1>Component 2</h1>
-            </gl-component>
-          </gl-stack>
-        </gl-row>
+      <gl-row :closable="false">
+        <gl-component title="SourceView">
+          <highlightjs id="svView1" language="jcl" :code="content" />
+        </gl-component>
         <gl-stack>
+          <gl-component title="component2">
+            <h1>Component 2</h1>
+          </gl-component>
           <gl-component title="component3">
             <h1>Component 3</h1>
           </gl-component>
@@ -21,7 +17,7 @@
             <h1>Component 4</h1>
           </gl-component>
         </gl-stack>
-      </gl-col>
+      </gl-row>
     </golden-layout>
   </div>
 </template>
@@ -41,7 +37,7 @@ function addLineNumbers() {
 }
 
 export default {
-  name: 'GoldenLayoutView',
+  name: 'GoldenLayoutView2',
   components: {
   },
   data() {
