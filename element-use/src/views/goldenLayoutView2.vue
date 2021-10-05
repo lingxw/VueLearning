@@ -1,7 +1,12 @@
 <template>
   <div>
     <button class="reset" @click="reset">Reset localStorage</button>
-    <golden-layout :showPopoutIcon="false" :showMaximiseIcon="true" :showCloseIcon="true" class="hscreen">
+    <golden-layout
+      :showPopoutIcon="false"
+      :showMaximiseIcon="true"
+      :showCloseIcon="true"
+      class="hscreen"
+    >
       <gl-row :closable="false">
         <gl-component title="SourceView">
           <highlightjs id="svView1" language="jcl" :code="content" />
@@ -30,16 +35,15 @@ import HljsExtend from '../plugins/highlightjs-extend'
 import sample from '../components/GoldenLayout/sample.jcl'
 
 function addLineNumbers() {
-  hljs.initLineNumbersOnLoad({ 
-    singleLine:true,
+  hljs.initLineNumbersOnLoad({
+    singleLine: true,
     startFrom: 1
   })
 }
 
 export default {
   name: 'GoldenLayoutView2',
-  components: {
-  },
+  components: {},
   data() {
     return {
       content: sample
@@ -56,8 +60,8 @@ export default {
   },
   methods: {
     reset() {
-      delete localStorage.browserGL;
-      location.reload();
+      delete localStorage.browserGL
+      location.reload()
     }
   }
 }
@@ -92,7 +96,7 @@ code {
   text-align: left;
 }
 
-.hljs-ln tr.current-row>td {
+.hljs-ln tr.current-row > td {
   background-color: #ecf5ff;
 }
 
@@ -105,28 +109,28 @@ code {
   color: rgb(30, 184, 132);
 }
 
-#fragments{
+#fragments {
   background-color: darkcyan;
 }
 
-#fragTable{
-	border-collapse: collapse;
+#fragTable {
+  border-collapse: collapse;
 }
 body {
-	overflow: hidden; 	/* The 'light' theme let a scroll-bar on the right of the main container */
+  overflow: hidden; /* The 'light' theme let a scroll-bar on the right of the main container */
 }
 .hscreen {
-	width: 100vw;
-	height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 .reset {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	float: right;
-	z-index: 9000;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  float: right;
+  z-index: 9000;
 }
 .reset:hover {
-	background-color: red;
+  background-color: red;
 }
 </style>
